@@ -1,0 +1,20 @@
+# --- Mock API (real-time data path) ---
+fastapi      # Web framework for the mock inventory and order APIs
+uvicorn      # Server that runs the FastAPI app
+pydantic     # Defines and validates data shapes (e.g. part and order responses)
+
+# --- Retrieval (static knowledge path) ---
+rank-bm25    # Keyword search (BM25); matches exact part IDs like BRK-1020
+
+# --- User interface ---
+streamlit    # Chat UI for agents: answers, sources panel, feedback buttons
+
+# --- Data and evaluation ---
+pandas       # Loads the evaluation test set (CSV) and summarizes results
+
+# --- Testing ---
+pytest       # Runs automated tests for the API and pipeline
+httpx        # Needed by FastAPI's TestClient to send test requests to the API
+
+# --- HTTP client ---
+requests     # Lets the app call the mock API, like a real system integration
