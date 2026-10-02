@@ -1,0 +1,28 @@
+{
+  "retriever": "bm25",
+  "k": 3,
+  "queries_scored": 20,
+  "doc_hit@3": 0.9,
+  "chunk_hit@3": 0.9,
+  "recall@3": 0.875,
+  "mrr": 0.825,
+  "by_category": {
+    "hybrid": {
+      "n": 5,
+      "doc_hit@3": 1.0,
+      "chunk_hit@3": 1.0
+    },
+    "static": {
+      "n": 15,
+      "doc_hit@3": 0.867,
+      "chunk_hit@3": 0.867
+    }
+  },
+  "score_separation": {
+    "answerable_min": 3.483,
+    "answerable_median": 11.962,
+    "out_of_scope_max": 11.393,
+    "out_of_scope_median": 5.282,
+    "overlap": true
+  }
+}

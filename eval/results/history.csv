@@ -1,0 +1,2 @@
+run_at,retriever,doc_hit@3,chunk_hit@3,recall@3,mrr
+20261002-120154,bm25,0.9,0.9,0.875,0.825

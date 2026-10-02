@@ -1,0 +1,41 @@
+query_id,query,category,expected_route,expected_entity,expected_chunks,expected_behavior,expected_answer
+S01,How long is the standard warranty on a new vehicle?,static,static,,warranty_policy::overview,answer,"3 years or 60,000 miles, whichever comes first"
+S02,"Which front brake pads fit the Sedan EX, and what do they cost?",static,static,,parts_catalog_brakes::BRK-1001,answer,"BRK-1001 ceramic front pads, $89.99"
+S03,Can a customer cancel an extended warranty after 45 days?,static,static,,extended_warranty_options::cancellation,answer,"Yes, with a prorated refund based on remaining coverage"
+S04,What is the list price of BRK-1020?,static,static,,parts_catalog_brakes::BRK-1020,answer,$142.00
+S05,Are brake pads covered under the standard warranty?,static,static,,warranty_policy::coverage-excludes|parts_catalog_brakes::warranty,answer,"No, brake pads are wear items; brake parts have a 12-month/12,000-mile defect warranty only"
+S06,How many days does a dealer have to submit a warranty claim after a repair?,static,static,,warranty_policy::claim-process,answer,Within 30 days of the repair date
+S07,What is the restocking fee when a new vehicle is returned?,static,static,,return_policy::new-vehicle-returns,answer,$500
+S08,Which 12V battery is compatible with the SUV Touring?,static,static,,parts_catalog_electrical::ELC-3002,answer,"ELC-3002 AGM high-capacity battery, $169.00"
+S09,How often should the cabin air filter be replaced?,static,static,,parts_catalog_filters_fluids::recommended-service-intervals,answer,"Every 20,000 km or 12 months"
+S10,Can a dealer return an unopened set of floor mats?,static,static,,accessories_catalog::return-eligibility|return_policy::non-returnable-items,flag_conflict,Sources conflict: accessories catalog says unopened items returnable in 30 days; return policy lists floor mats as non-returnable
+S11,Do customers with an extended warranty get priority service appointments?,static,static,,service_scheduling::priority-scheduling,answer,"Yes, guaranteed slot within 48 hours"
+S12,What is the maximum goodwill gesture a dealer can offer without approval?,static,static,,customer_complaints_process::goodwill-adjustments,answer,Up to $300 in value
+S13,How quickly must portal access be removed when an employee leaves the dealership?,static,static,,dealer_portal_access::access-revocation,answer,Within 24 hours
+S14,What paperwork does a customer need to get a car loan?,static,static,,financing_incentives::documentation-required-for-financing,answer,"Proof of income, valid ID, proof of residence"
+S15,Can a customer send back a car they bought three days ago?,static,static,,return_policy::new-vehicle-returns,answer,"Yes, within 5 calendar days if under 250 miles and undamaged; $500 restocking fee"
+R01,How many BRK-1020 calipers are in stock?,realtime,realtime,BRK-1020,,api_lookup,"Inventory API: 9 units, low stock"
+R02,What is the status of order ORD-10482?,realtime,realtime,ORD-10482,,api_lookup,Order API: Shipped
+R03,Is FLT-2001 available at the north warehouse?,realtime,realtime,FLT-2001,,api_lookup,Inventory API with warehouse=WH-NORTH: 210 units
+R04,Has order ORD-10471 been delivered yet?,realtime,realtime,ORD-10471,,api_lookup,Order API: Delivered on 2026-09-24
+R05,Do we have any ELC-3021 headlights in stock?,realtime,realtime,ELC-3021,,api_lookup,"Inventory API: backordered, restock 2026-10-14"
+R06,When will order ORD-10388 arrive?,realtime,realtime,ORD-10388,,api_lookup,"Order API: delayed, revised delivery 2026-10-21"
+R07,check stock for acc-4040,realtime,realtime,ACC-4040,,api_lookup,"Inventory API: 3 units, low stock"
+R08,Track ORD-10215,realtime,realtime,ORD-10215,,api_lookup,"Order API: Shipped, tracking TRK-77120046"
+R09,Which warehouses have BRK-1040 right now?,realtime,realtime,BRK-1040,,api_lookup,Inventory API: WH-NORTH only
+R10,Is order ORD-10503 still in Placed status?,realtime,realtime,ORD-10503,,api_lookup,Order API: Placed
+H01,"Is ELC-3030 in stock, and can the dealer return it once opened?",hybrid,hybrid,ELC-3030,parts_catalog_electrical::special-order-notice|return_policy::parts-returns,answer_and_lookup,Backordered (restock 2026-10-21); non-returnable once opened
+H02,Is BRK-1020 in stock and is it covered by a parts warranty?,hybrid,hybrid,BRK-1020,parts_catalog_brakes::warranty,answer_and_lookup,"9 units, low stock; 12-month/12,000-mile defect warranty"
+H03,Can order ORD-10495 still be cancelled free of charge?,hybrid,hybrid,ORD-10495,order_status_faq::order-cancellation,answer_and_lookup,"No, it is in Processing; a 10% fee may apply for special-order items"
+H04,Order ORD-10388 is late. What is the policy for delayed orders?,hybrid,hybrid,ORD-10388,order_status_faq::delayed-orders,answer_and_lookup,"Delayed, revised 2026-10-21; orders >5 business days late are flagged and dealers notified"
+H05,We need 60 litres of FLD-2100. Is it in stock and do we get a bulk discount?,hybrid,hybrid,FLD-2100,parts_catalog_filters_fluids::bulk-ordering,answer_and_lookup,"In stock (1,450 units); yes, 10% for more than 50 units"
+O01,What is the oil filter part number for the SUV Touring?,out_of_scope,static,,,refuse,No compatible oil filter listed for SUV Touring
+O02,What is the towing capacity of the SUV Sport?,out_of_scope,static,,,refuse,Not covered by the knowledge base
+O03,What components does the Essential Plus plan cover?,out_of_scope,static,,,refuse,Coverage for Essential Plus is not defined in the plan document
+O04,How do I reset the clock on the infotainment screen?,out_of_scope,static,,,refuse,Not covered by the knowledge base
+O05,What will the weather be in Dubai tomorrow?,out_of_scope,static,,,refuse,Not covered by the knowledge base
+O06,What is the MSRP of a new SUV Touring?,out_of_scope,static,,,refuse,Vehicle prices are not in the knowledge base
+O07,Who is the CEO of the company?,out_of_scope,static,,,refuse,Not covered by the knowledge base
+A01,Where is my order?,ambiguous,clarify,,,clarify,Ask for the order ID
+A02,Is the part in stock?,ambiguous,clarify,,,clarify,Ask which part ID
+A03,Can you check stock for the front brake caliper?,ambiguous,clarify,,,clarify,Ask left (BRK-1020) or right (BRK-1021)
