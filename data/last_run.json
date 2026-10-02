@@ -1,0 +1,35 @@
+{
+  "unchanged": [
+    "accessories_catalog",
+    "customer_complaints_process",
+    "dealer_onboarding",
+    "dealer_portal_access",
+    "extended_warranty_options",
+    "financing_incentives",
+    "inventory_lookup_faq",
+    "inventory_management",
+    "order_status_faq",
+    "parts_catalog_brakes",
+    "parts_catalog_electrical",
+    "parts_catalog_filters_fluids",
+    "recall_procedures",
+    "service_scheduling",
+    "trade_in_policy",
+    "warranty_policy"
+  ],
+  "added": [],
+  "updated": [
+    "return_policy"
+  ],
+  "removed": [],
+  "chunks_added": [],
+  "chunks_updated": [
+    "return_policy::parts-returns"
+  ],
+  "chunks_removed": [],
+  "rebuild": false,
+  "total_documents": 17,
+  "total_chunks": 103,
+  "unknown_domain_docs": [],
+  "run_at": "2026-10-02T11:49:44+00:00"
+}

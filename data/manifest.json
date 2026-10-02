@@ -1,0 +1,194 @@
+{
+  "chunker_version": "1.0",
+  "updated_at": "2026-10-02T11:49:44+00:00",
+  "documents": {
+    "accessories_catalog": {
+      "hash": "59fa5ce3456ac0a2622d77e08c09b2d84e4bc224b7d6c00f77390c405da50639",
+      "chunk_ids": [
+        "accessories_catalog::installation",
+        "accessories_catalog::return-eligibility",
+        "accessories_catalog::ACC-4001",
+        "accessories_catalog::ACC-4002",
+        "accessories_catalog::ACC-4010",
+        "accessories_catalog::ACC-4020",
+        "accessories_catalog::ACC-4030",
+        "accessories_catalog::ACC-4040"
+      ]
+    },
+    "customer_complaints_process": {
+      "hash": "d0cca91fc5d19081a85b4e738a6a0e3311c62bd1c6c3e991dc0da124d0c25b6c",
+      "chunk_ids": [
+        "customer_complaints_process::complaint-channels",
+        "customer_complaints_process::response-time-standards",
+        "customer_complaints_process::escalation-path",
+        "customer_complaints_process::goodwill-adjustments",
+        "customer_complaints_process::documentation"
+      ]
+    },
+    "dealer_onboarding": {
+      "hash": "86d5dc2df3457260523c81d787ea9eaa3ed3c4a1b7df6ef4a2d8184f2b3a413a",
+      "chunk_ids": [
+        "dealer_onboarding::step-1-application-approval",
+        "dealer_onboarding::step-2-systems-access",
+        "dealer_onboarding::step-3-training-requirements",
+        "dealer_onboarding::step-4-initial-inventory-allocation",
+        "dealer_onboarding::ongoing-compliance"
+      ]
+    },
+    "dealer_portal_access": {
+      "hash": "a9202467349ae989ff4220887a87bd20b7a598eb9d52ff99ef74c06b60b1cf30",
+      "chunk_ids": [
+        "dealer_portal_access::user-roles",
+        "dealer_portal_access::password-security-policy",
+        "dealer_portal_access::account-lockout",
+        "dealer_portal_access::access-revocation",
+        "dealer_portal_access::support-contact"
+      ]
+    },
+    "extended_warranty_options": {
+      "hash": "b36bec883b68b4a7338b9ef58a379e44d3802cb3fe9c3807d42e904be5651375",
+      "chunk_ids": [
+        "extended_warranty_options::overview",
+        "extended_warranty_options::available-plans",
+        "extended_warranty_options::eligibility",
+        "extended_warranty_options::what-s-covered",
+        "extended_warranty_options::cancellation",
+        "extended_warranty_options::dealer-commission"
+      ]
+    },
+    "financing_incentives": {
+      "hash": "718f8727c2c8b351d429cd524d8ce3065360f2142e29d9c20b172657fb49b863",
+      "chunk_ids": [
+        "financing_incentives::standard-financing",
+        "financing_incentives::current-incentive-programs",
+        "financing_incentives::lease-options",
+        "financing_incentives::dealer-administered-discounts",
+        "financing_incentives::documentation-required-for-financing"
+      ]
+    },
+    "inventory_lookup_faq": {
+      "hash": "2b4d5a2f6d84da22a165e6b99b79d19f43843a3c50db7bb0b9abad1a86688a1b",
+      "chunk_ids": [
+        "inventory_lookup_faq::how-do-i-check-current-stock-for-a-part",
+        "inventory_lookup_faq::standard-reorder-thresholds",
+        "inventory_lookup_faq::warehouse-network",
+        "inventory_lookup_faq::backorder-handling"
+      ]
+    },
+    "inventory_management": {
+      "hash": "958a360c5e84a1d0ea819f6a1ea9cf38688eb80d6e0955754cc3531d24466b24",
+      "chunk_ids": [
+        "inventory_management::inventory-allocation",
+        "inventory_management::minimum-stocking-requirements",
+        "inventory_management::inter-dealer-transfers",
+        "inventory_management::aged-inventory",
+        "inventory_management::floorplan-financing"
+      ]
+    },
+    "order_status_faq": {
+      "hash": "6c360b72fbbef62de920db2b3aaf2d13cced34f94dbff153502be4d6c0c9b429",
+      "chunk_ids": [
+        "order_status_faq::how-is-order-status-determined",
+        "order_status_faq::note-on-real-time-lookups",
+        "order_status_faq::typical-processing-times",
+        "order_status_faq::delayed-orders",
+        "order_status_faq::order-cancellation"
+      ]
+    },
+    "parts_catalog_brakes": {
+      "hash": "f4caca04a9db026a80f9a0ce3ae0bd42e85776cff72183371b1c0d84e0ad8780",
+      "chunk_ids": [
+        "parts_catalog_brakes::installation-notes",
+        "parts_catalog_brakes::warranty",
+        "parts_catalog_brakes::BRK-1001",
+        "parts_catalog_brakes::BRK-1002",
+        "parts_catalog_brakes::BRK-1010",
+        "parts_catalog_brakes::BRK-1011",
+        "parts_catalog_brakes::BRK-1020",
+        "parts_catalog_brakes::BRK-1021",
+        "parts_catalog_brakes::BRK-1030",
+        "parts_catalog_brakes::BRK-1040"
+      ]
+    },
+    "parts_catalog_electrical": {
+      "hash": "66b82d25038969a66e2398a41b3bbd774baaa701e991e33a70f6bc0e2497f2d1",
+      "chunk_ids": [
+        "parts_catalog_electrical::special-order-notice",
+        "parts_catalog_electrical::diagnostic-requirement",
+        "parts_catalog_electrical::ELC-3001",
+        "parts_catalog_electrical::ELC-3002",
+        "parts_catalog_electrical::ELC-3010",
+        "parts_catalog_electrical::ELC-3020",
+        "parts_catalog_electrical::ELC-3021",
+        "parts_catalog_electrical::ELC-3030",
+        "parts_catalog_electrical::ELC-3040"
+      ]
+    },
+    "parts_catalog_filters_fluids": {
+      "hash": "854e75b1869aae72cb2e11810b7b28889b92f32c5753d130727a73c39dd16b67",
+      "chunk_ids": [
+        "parts_catalog_filters_fluids::recommended-service-intervals",
+        "parts_catalog_filters_fluids::bulk-ordering",
+        "parts_catalog_filters_fluids::FLT-2001",
+        "parts_catalog_filters_fluids::FLT-2002",
+        "parts_catalog_filters_fluids::FLT-2010",
+        "parts_catalog_filters_fluids::FLT-2011",
+        "parts_catalog_filters_fluids::FLD-2100",
+        "parts_catalog_filters_fluids::FLD-2101",
+        "parts_catalog_filters_fluids::FLD-2110",
+        "parts_catalog_filters_fluids::FLD-2120"
+      ]
+    },
+    "recall_procedures": {
+      "hash": "d7477da6928c5ffd3f12552289431dbd89959ff64f4299e88c64450cec7323ec",
+      "chunk_ids": [
+        "recall_procedures::recall-notification",
+        "recall_procedures::dealer-responsibilities",
+        "recall_procedures::parts-availability-for-recalls",
+        "recall_procedures::customer-communication",
+        "recall_procedures::reporting"
+      ]
+    },
+    "return_policy": {
+      "hash": "301ce7b406f93814d95bc7a136ed8de246fd3184c7d4c91b5bae4ac5669aed23",
+      "chunk_ids": [
+        "return_policy::new-vehicle-returns",
+        "return_policy::parts-returns",
+        "return_policy::exchange-process",
+        "return_policy::non-returnable-items",
+        "return_policy::damaged-or-defective-items"
+      ]
+    },
+    "service_scheduling": {
+      "hash": "9b0a945b022eb9e0a1ec990f8a4af731f6e068b192af1c355c2be4348cabbec4",
+      "chunk_ids": [
+        "service_scheduling::booking-windows",
+        "service_scheduling::standard-service-slot-durations",
+        "service_scheduling::cancellation-rescheduling",
+        "service_scheduling::loaner-vehicle-policy",
+        "service_scheduling::priority-scheduling"
+      ]
+    },
+    "trade_in_policy": {
+      "hash": "c9ae20eee713a57cfdec72910d20f561737600c18967eaec76bb7b2b787ce8c9",
+      "chunk_ids": [
+        "trade_in_policy::valuation-process",
+        "trade_in_policy::condition-categories",
+        "trade_in_policy::outstanding-loan-balances",
+        "trade_in_policy::required-documentation",
+        "trade_in_policy::dealer-discretion"
+      ]
+    },
+    "warranty_policy": {
+      "hash": "aa115117d8fa78e957982f3ace892e10ade2818d5f4247ba7766200f95d65557",
+      "chunk_ids": [
+        "warranty_policy::overview",
+        "warranty_policy::coverage-includes",
+        "warranty_policy::coverage-excludes",
+        "warranty_policy::powertrain-extended-warranty",
+        "warranty_policy::claim-process",
+        "warranty_policy::transferability"
+      ]
+    }
+  }
+}
