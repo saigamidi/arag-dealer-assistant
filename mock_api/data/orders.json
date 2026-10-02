@@ -1,0 +1,179 @@
+{
+  "data_as_of": "2026-10-02T08:00:00Z",
+  "orders": {
+    "ORD-10471": {
+      "order_id": "ORD-10471",
+      "dealer_id": "DLR-204",
+      "order_type": "in_stock_parts",
+      "status": "Delivered",
+      "placed_date": "2026-09-22",
+      "expected_delivery": "2026-09-25",
+      "delivered_date": "2026-09-24",
+      "tracking_number": "TRK-88310457",
+      "items": [
+        {
+          "part_id": "BRK-1001",
+          "quantity": 4
+        },
+        {
+          "part_id": "BRK-1030",
+          "quantity": 6
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10482": {
+      "order_id": "ORD-10482",
+      "dealer_id": "DLR-117",
+      "order_type": "in_stock_parts",
+      "status": "Shipped",
+      "placed_date": "2026-09-29",
+      "expected_delivery": "2026-10-03",
+      "tracking_number": "TRK-88310922",
+      "items": [
+        {
+          "part_id": "BRK-1020",
+          "quantity": 2
+        },
+        {
+          "part_id": "BRK-1021",
+          "quantity": 2
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10495": {
+      "order_id": "ORD-10495",
+      "dealer_id": "DLR-204",
+      "order_type": "in_stock_parts",
+      "status": "Processing",
+      "placed_date": "2026-10-01",
+      "expected_delivery": "2026-10-06",
+      "items": [
+        {
+          "part_id": "FLT-2001",
+          "quantity": 24
+        },
+        {
+          "part_id": "FLD-2100",
+          "quantity": 60
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10503": {
+      "order_id": "ORD-10503",
+      "dealer_id": "DLR-331",
+      "order_type": "in_stock_parts",
+      "status": "Placed",
+      "placed_date": "2026-10-02",
+      "expected_delivery": "2026-10-07",
+      "items": [
+        {
+          "part_id": "ACC-4001",
+          "quantity": 10
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10388": {
+      "order_id": "ORD-10388",
+      "dealer_id": "DLR-117",
+      "order_type": "special_order_parts",
+      "status": "Processing",
+      "placed_date": "2026-09-08",
+      "expected_delivery": "2026-09-26",
+      "is_delayed": true,
+      "revised_delivery": "2026-10-21",
+      "delay_reason": "Part backordered across all warehouses",
+      "items": [
+        {
+          "part_id": "ELC-3030",
+          "quantity": 1
+        }
+      ]
+    },
+    "ORD-10452": {
+      "order_id": "ORD-10452",
+      "dealer_id": "DLR-089",
+      "order_type": "special_order_parts",
+      "status": "Processing",
+      "placed_date": "2026-09-18",
+      "expected_delivery": "2026-10-09",
+      "items": [
+        {
+          "part_id": "ELC-3021",
+          "quantity": 1
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10290": {
+      "order_id": "ORD-10290",
+      "dealer_id": "DLR-089",
+      "order_type": "vehicle_factory_order",
+      "status": "Processing",
+      "placed_date": "2026-08-17",
+      "expected_delivery": "2026-10-19",
+      "items": [
+        {
+          "model": "SUV Touring",
+          "quantity": 3
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10215": {
+      "order_id": "ORD-10215",
+      "dealer_id": "DLR-331",
+      "order_type": "vehicle_factory_order",
+      "status": "Shipped",
+      "placed_date": "2026-07-28",
+      "expected_delivery": "2026-10-05",
+      "tracking_number": "TRK-77120046",
+      "items": [
+        {
+          "model": "Sedan EX",
+          "quantity": 2
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10460": {
+      "order_id": "ORD-10460",
+      "dealer_id": "DLR-204",
+      "order_type": "in_stock_parts",
+      "status": "Delivered",
+      "placed_date": "2026-09-24",
+      "expected_delivery": "2026-09-28",
+      "delivered_date": "2026-09-26",
+      "tracking_number": "TRK-88310604",
+      "items": [
+        {
+          "part_id": "ELC-3002",
+          "quantity": 2
+        },
+        {
+          "part_id": "ACC-4030",
+          "quantity": 1
+        }
+      ],
+      "is_delayed": false
+    },
+    "ORD-10499": {
+      "order_id": "ORD-10499",
+      "dealer_id": "DLR-117",
+      "order_type": "in_stock_parts",
+      "status": "Placed",
+      "placed_date": "2026-10-02",
+      "expected_delivery": "2026-10-06",
+      "items": [
+        {
+          "part_id": "BRK-1040",
+          "quantity": 2
+        }
+      ],
+      "is_delayed": false
+    }
+  }
+}

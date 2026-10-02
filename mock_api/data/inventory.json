@@ -1,0 +1,362 @@
+{
+  "data_as_of": "2026-10-02T08:00:00Z",
+  "warehouses": [
+    "WH-NORTH",
+    "WH-SOUTH",
+    "WH-EAST",
+    "WH-WEST"
+  ],
+  "low_stock_threshold": 10,
+  "parts": {
+    "BRK-1001": {
+      "part_id": "BRK-1001",
+      "description": "Front brake pad set (ceramic)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 42,
+        "WH-SOUTH": 35,
+        "WH-EAST": 28,
+        "WH-WEST": 31
+      }
+    },
+    "BRK-1002": {
+      "part_id": "BRK-1002",
+      "description": "Rear brake pad set (ceramic)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 30,
+        "WH-SOUTH": 22,
+        "WH-EAST": 25,
+        "WH-WEST": 18
+      }
+    },
+    "BRK-1010": {
+      "part_id": "BRK-1010",
+      "description": "Front brake rotor (12-inch)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 16,
+        "WH-SOUTH": 12,
+        "WH-EAST": 9,
+        "WH-WEST": 14
+      }
+    },
+    "BRK-1011": {
+      "part_id": "BRK-1011",
+      "description": "Rear brake rotor (11-inch)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 11,
+        "WH-SOUTH": 8,
+        "WH-EAST": 10,
+        "WH-WEST": 6
+      }
+    },
+    "BRK-1020": {
+      "part_id": "BRK-1020",
+      "description": "Brake caliper assembly (front, left)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 4,
+        "WH-SOUTH": 0,
+        "WH-EAST": 3,
+        "WH-WEST": 2
+      }
+    },
+    "BRK-1021": {
+      "part_id": "BRK-1021",
+      "description": "Brake caliper assembly (front, right)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 6,
+        "WH-SOUTH": 5,
+        "WH-EAST": 0,
+        "WH-WEST": 7
+      }
+    },
+    "BRK-1030": {
+      "part_id": "BRK-1030",
+      "description": "Brake fluid (DOT 4, 1L)",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 120,
+        "WH-SOUTH": 95,
+        "WH-EAST": 110,
+        "WH-WEST": 88
+      }
+    },
+    "BRK-1040": {
+      "part_id": "BRK-1040",
+      "description": "ABS sensor, front",
+      "category": "brakes",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 14,
+        "WH-SOUTH": 0,
+        "WH-EAST": 0,
+        "WH-WEST": 0
+      }
+    },
+    "ELC-3001": {
+      "part_id": "ELC-3001",
+      "description": "12V battery (standard)",
+      "category": "electrical",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 25,
+        "WH-SOUTH": 20,
+        "WH-EAST": 18,
+        "WH-WEST": 22
+      }
+    },
+    "ELC-3002": {
+      "part_id": "ELC-3002",
+      "description": "12V battery (AGM, high-capacity)",
+      "category": "electrical",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 12,
+        "WH-SOUTH": 9,
+        "WH-EAST": 11,
+        "WH-WEST": 8
+      }
+    },
+    "ELC-3010": {
+      "part_id": "ELC-3010",
+      "description": "Alternator assembly",
+      "category": "electrical",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 3,
+        "WH-SOUTH": 2,
+        "WH-EAST": 0,
+        "WH-WEST": 1
+      }
+    },
+    "ELC-3020": {
+      "part_id": "ELC-3020",
+      "description": "Headlight assembly (LED, left)",
+      "category": "electrical",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 5,
+        "WH-SOUTH": 4,
+        "WH-EAST": 6,
+        "WH-WEST": 3
+      }
+    },
+    "ELC-3021": {
+      "part_id": "ELC-3021",
+      "description": "Headlight assembly (LED, right)",
+      "category": "electrical",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 0,
+        "WH-SOUTH": 0,
+        "WH-EAST": 0,
+        "WH-WEST": 0
+      },
+      "estimated_restock_date": "2026-10-14"
+    },
+    "ELC-3030": {
+      "part_id": "ELC-3030",
+      "description": "Infotainment control module",
+      "category": "electrical",
+      "special_order": true,
+      "quantities": {
+        "WH-NORTH": 0,
+        "WH-SOUTH": 0,
+        "WH-EAST": 0,
+        "WH-WEST": 0
+      },
+      "estimated_restock_date": "2026-10-21"
+    },
+    "ELC-3040": {
+      "part_id": "ELC-3040",
+      "description": "Wiring harness, engine bay",
+      "category": "electrical",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 7,
+        "WH-SOUTH": 6,
+        "WH-EAST": 5,
+        "WH-WEST": 4
+      }
+    },
+    "FLT-2001": {
+      "part_id": "FLT-2001",
+      "description": "Engine oil filter",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 210,
+        "WH-SOUTH": 180,
+        "WH-EAST": 165,
+        "WH-WEST": 190
+      }
+    },
+    "FLT-2002": {
+      "part_id": "FLT-2002",
+      "description": "Engine oil filter (high-performance)",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 48,
+        "WH-SOUTH": 40,
+        "WH-EAST": 0,
+        "WH-WEST": 35
+      }
+    },
+    "FLT-2010": {
+      "part_id": "FLT-2010",
+      "description": "Cabin air filter",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 150,
+        "WH-SOUTH": 140,
+        "WH-EAST": 120,
+        "WH-WEST": 130
+      }
+    },
+    "FLT-2011": {
+      "part_id": "FLT-2011",
+      "description": "Engine air filter",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 95,
+        "WH-SOUTH": 88,
+        "WH-EAST": 90,
+        "WH-WEST": 80
+      }
+    },
+    "FLD-2100": {
+      "part_id": "FLD-2100",
+      "description": "Synthetic engine oil, 5W-30 (1L)",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 400,
+        "WH-SOUTH": 350,
+        "WH-EAST": 380,
+        "WH-WEST": 320
+      }
+    },
+    "FLD-2101": {
+      "part_id": "FLD-2101",
+      "description": "Synthetic engine oil, 0W-20 (1L)",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 310,
+        "WH-SOUTH": 290,
+        "WH-EAST": 0,
+        "WH-WEST": 275
+      }
+    },
+    "FLD-2110": {
+      "part_id": "FLD-2110",
+      "description": "Transmission fluid (1L)",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 140,
+        "WH-SOUTH": 120,
+        "WH-EAST": 130,
+        "WH-WEST": 115
+      }
+    },
+    "FLD-2120": {
+      "part_id": "FLD-2120",
+      "description": "Coolant concentrate (1L)",
+      "category": "filters_fluids",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 160,
+        "WH-SOUTH": 150,
+        "WH-EAST": 145,
+        "WH-WEST": 140
+      }
+    },
+    "ACC-4001": {
+      "part_id": "ACC-4001",
+      "description": "All-weather floor mats (set of 4)",
+      "category": "accessories",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 60,
+        "WH-SOUTH": 55,
+        "WH-EAST": 48,
+        "WH-WEST": 50
+      }
+    },
+    "ACC-4002": {
+      "part_id": "ACC-4002",
+      "description": "Roof rack cross bars",
+      "category": "accessories",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 8,
+        "WH-SOUTH": 6,
+        "WH-EAST": 0,
+        "WH-WEST": 5
+      }
+    },
+    "ACC-4010": {
+      "part_id": "ACC-4010",
+      "description": "Cargo tray (molded)",
+      "category": "accessories",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 22,
+        "WH-SOUTH": 18,
+        "WH-EAST": 20,
+        "WH-WEST": 15
+      }
+    },
+    "ACC-4020": {
+      "part_id": "ACC-4020",
+      "description": "Mudguard set (front & rear)",
+      "category": "accessories",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 30,
+        "WH-SOUTH": 25,
+        "WH-EAST": 28,
+        "WH-WEST": 22
+      }
+    },
+    "ACC-4030": {
+      "part_id": "ACC-4030",
+      "description": "Wireless phone charging pad",
+      "category": "accessories",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 2,
+        "WH-SOUTH": 0,
+        "WH-EAST": 1,
+        "WH-WEST": 0
+      }
+    },
+    "ACC-4040": {
+      "part_id": "ACC-4040",
+      "description": "Rear seat entertainment package",
+      "category": "accessories",
+      "special_order": false,
+      "quantities": {
+        "WH-NORTH": 1,
+        "WH-SOUTH": 0,
+        "WH-EAST": 2,
+        "WH-WEST": 0
+      }
+    }
+  }
+}
