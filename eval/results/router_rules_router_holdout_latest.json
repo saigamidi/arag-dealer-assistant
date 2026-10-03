@@ -1,0 +1,39 @@
+{
+  "router": "rules",
+  "test_set": "router_holdout.csv",
+  "queries": 15,
+  "routing_accuracy": 0.8,
+  "entity_accuracy": 1.0,
+  "by_category": {
+    "holdout": {
+      "n": 15,
+      "accuracy": 0.8
+    }
+  },
+  "confusion": {
+    "static": {
+      "static": 5,
+      "realtime": 0,
+      "hybrid": 0,
+      "clarify": 0
+    },
+    "realtime": {
+      "static": 2,
+      "realtime": 1,
+      "hybrid": 0,
+      "clarify": 0
+    },
+    "hybrid": {
+      "static": 0,
+      "realtime": 0,
+      "hybrid": 3,
+      "clarify": 0
+    },
+    "clarify": {
+      "static": 1,
+      "realtime": 0,
+      "hybrid": 0,
+      "clarify": 3
+    }
+  }
+}

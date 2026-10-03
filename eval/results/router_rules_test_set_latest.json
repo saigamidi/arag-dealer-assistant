@@ -1,0 +1,55 @@
+{
+  "router": "rules",
+  "test_set": "test_set.csv",
+  "queries": 40,
+  "routing_accuracy": 1.0,
+  "entity_accuracy": 1.0,
+  "by_category": {
+    "static": {
+      "n": 15,
+      "accuracy": 1.0
+    },
+    "realtime": {
+      "n": 10,
+      "accuracy": 1.0
+    },
+    "hybrid": {
+      "n": 5,
+      "accuracy": 1.0
+    },
+    "out_of_scope": {
+      "n": 7,
+      "accuracy": 1.0
+    },
+    "ambiguous": {
+      "n": 3,
+      "accuracy": 1.0
+    }
+  },
+  "confusion": {
+    "static": {
+      "static": 22,
+      "realtime": 0,
+      "hybrid": 0,
+      "clarify": 0
+    },
+    "realtime": {
+      "static": 0,
+      "realtime": 10,
+      "hybrid": 0,
+      "clarify": 0
+    },
+    "hybrid": {
+      "static": 0,
+      "realtime": 0,
+      "hybrid": 5,
+      "clarify": 0
+    },
+    "clarify": {
+      "static": 0,
+      "realtime": 0,
+      "hybrid": 0,
+      "clarify": 3
+    }
+  }
+}
