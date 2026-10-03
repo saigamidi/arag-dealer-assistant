@@ -70,6 +70,8 @@ class RouteDecision:
     reasons: list[str] = field(default_factory=list)
     clarification: str | None = None          # question to ask the agent, for "clarify"
     candidates: list[dict] = field(default_factory=list)   # suggested parts, for "clarify"
+    missing: str | None = None                # "part" or "order", for "clarify"
+    suggested_id: str | None = None           # e.g. ORD-10482 guessed from "order 10482"
 
     @property
     def needs_retrieval(self) -> bool:
@@ -143,7 +145,7 @@ class RuleRouter:
         if live and not policy:
             d.route = "clarify"
             d.reasons.append(f"live intent ({', '.join(live)}) but no part or order ID")
-            d.clarification, d.candidates = self._clarify(query)
+            d.clarification, d.candidates, d.missing, d.suggested_id = self._clarify(query)
             return d
 
         if live and policy:
@@ -152,12 +154,14 @@ class RuleRouter:
             d.reasons.append("no IDs and no live intent")
         return d
 
-    def _clarify(self, query: str) -> tuple[str, list[dict]]:
+    def _clarify(self, query: str) -> tuple[str, list[dict], str, str | None]:
+        """Return (question to ask, candidate parts, what's missing, suggested ID)."""
         bare = BARE_ORDER_NUMBER.search(query)
         if bare:
-            return f"Did you mean order ORD-{bare.group(1)}? Order IDs look like ORD-12345.", []
+            suggestion = f"ORD-{bare.group(1)}"
+            return f"Did you mean order {suggestion}? Order IDs look like ORD-12345.", [], "order", suggestion
         if re.search(r"\border", query, re.I):
-            return "Which order? Please share the order ID (format ORD-12345).", []
+            return "Which order? Please share the order ID (format ORD-12345).", [], "order", None
 
         candidates = []
         if self.retriever is not None:
@@ -169,8 +173,8 @@ class RuleRouter:
                               for r in results if r.score >= 0.8 * top][:3]
         if candidates:
             options = " or ".join(f"{c['part_id']} ({c['description']})" for c in candidates)
-            return f"Which part do you mean: {options}?", candidates
-        return "Which part? Please share the part ID (format ABC-1234, e.g. BRK-1020).", []
+            return f"Which part do you mean: {options}?", candidates, "part", None
+        return "Which part? Please share the part ID (format ABC-1234, e.g. BRK-1020).", [], "part", None
 
 
 if __name__ == "__main__":
