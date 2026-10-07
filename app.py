@@ -89,6 +89,10 @@ def sidebar() -> str | None:
     with st.sidebar:
         st.header("🔧 ARAG")
         st.caption("Dealer support assistant · v1 preview (no LLM yet)")
+        retriever_label = {"ResilientVectorRetriever": "vector (semantic)", "HybridRetriever": "hybrid",
+                           "BM25Retriever": "BM25 (keyword)"}
+        kind = type(get_assistant().retriever).__name__
+        st.markdown(f"**Search:** {retriever_label.get(kind, kind)}")
 
         healthy = ApiClient().health()
         st.markdown(f"**Mock API:** {'🟢 connected' if healthy else '🔴 not running'}")

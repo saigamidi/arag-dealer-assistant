@@ -25,7 +25,7 @@ from pathlib import Path
 from src.api_client import ApiClient, ApiResult
 from src.conversation import PendingClarification, resolve_follow_up
 from src.generator import Citation, Generator, StubGenerator
-from src.retrieve import BM25Retriever
+from src.retrieve import make_retriever
 from src.router import RuleRouter
 
 LOG_DIR = Path("data/logs")
@@ -51,8 +51,10 @@ class Answer:
 class Assistant:
     def __init__(self, retriever=None, router=None, generator: Generator | None = None,
                  api: ApiClient | None = None, log_dir: Path = LOG_DIR):
-        self.retriever = retriever or BM25Retriever()
-        self.router = router or RuleRouter(self.retriever)
+        self.retriever = retriever or make_retriever()
+        # Clarification candidates ("BRK-1020 or BRK-1021?") use keyword search:
+        # exact part names matter more than meaning there.
+        self.router = router or RuleRouter(getattr(self.retriever, "keyword_retriever", self.retriever))
         self.generator = generator or StubGenerator()
         self.api = api or ApiClient()
         self.log_dir = log_dir
@@ -111,6 +113,8 @@ class Assistant:
                           for r in answer.api_results],
             "latency_ms": answer.latency_ms,
             "generator": answer.generator,
+            "retriever": type(self.retriever).__name__,
+            "retrieval_fallback": getattr(self.retriever, "last_fallback", None),
         })
 
     def record_feedback(self, answer_id: str, rating: str, comment: str = "") -> None:

@@ -1,0 +1,28 @@
+{
+  "retriever": "hybrid",
+  "k": 3,
+  "queries_scored": 20,
+  "doc_hit@3": 0.95,
+  "chunk_hit@3": 0.9,
+  "recall@3": 0.9,
+  "mrr": 0.872,
+  "by_category": {
+    "hybrid": {
+      "n": 5,
+      "doc_hit@3": 1.0,
+      "chunk_hit@3": 1.0
+    },
+    "static": {
+      "n": 15,
+      "doc_hit@3": 0.933,
+      "chunk_hit@3": 0.867
+    }
+  },
+  "score_separation": {
+    "answerable_min": 0.031,
+    "answerable_median": 0.033,
+    "out_of_scope_max": 0.033,
+    "out_of_scope_median": 0.032,
+    "overlap": true
+  }
+}

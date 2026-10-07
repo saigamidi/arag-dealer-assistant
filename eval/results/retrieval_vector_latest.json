@@ -1,0 +1,28 @@
+{
+  "retriever": "vector",
+  "k": 3,
+  "queries_scored": 20,
+  "doc_hit@3": 1.0,
+  "chunk_hit@3": 1.0,
+  "recall@3": 0.95,
+  "mrr": 1.0,
+  "by_category": {
+    "hybrid": {
+      "n": 5,
+      "doc_hit@3": 1.0,
+      "chunk_hit@3": 1.0
+    },
+    "static": {
+      "n": 15,
+      "doc_hit@3": 1.0,
+      "chunk_hit@3": 1.0
+    }
+  },
+  "score_separation": {
+    "answerable_min": 0.475,
+    "answerable_median": 0.661,
+    "out_of_scope_max": 0.67,
+    "out_of_scope_median": 0.447,
+    "overlap": true
+  }
+}

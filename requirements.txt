@@ -18,3 +18,11 @@ httpx        # Needed by FastAPI's TestClient to send test requests to the API
 
 # --- HTTP client ---
 requests     # Lets the app call the mock API, like a real system integration
+
+# --- Cloud (AWS) ---
+boto3
+
+  # --- Cloud (Azure) ---
+  openai       # Azure OpenAI client: embeddings and chat
+
+  python-dotenv   # loads settings from .env

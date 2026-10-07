@@ -18,6 +18,7 @@ informs the "I don't know" threshold used later by the generator.
 Usage (from the project root):
     python -m eval.run_eval                     # retrieval + routing
     python -m eval.run_eval --only router       # one part only (retrieval | router)
+    python -m eval.run_eval --retriever hybrid  # one retriever (bm25 | vector | hybrid | all)
     python -m eval.run_eval --show-all          # print every query, not just misses
 
 Routing is also scored on eval/router_holdout.csv: 15 new questions written
@@ -34,7 +35,7 @@ import statistics
 from datetime import datetime, timezone
 from pathlib import Path
 
-from src.retrieve import BM25Retriever
+from src.retrieve import BM25Retriever, make_retriever
 from src.router import RuleRouter
 
 TEST_SET = Path("eval/test_set.csv")
@@ -121,7 +122,7 @@ def print_report(summary, scored, per_query, show_all):
     print(f"\nTop-score separation (for the 'I don't know' threshold)")
     print(f"  Answerable:   min {s['answerable_min']:.2f}, median {s['answerable_median']:.2f}")
     print(f"  Out-of-scope: max {s['out_of_scope_max']:.2f}, median {s['out_of_scope_median']:.2f}")
-    print("  -> Scores overlap: a BM25 score threshold alone can't separate them."
+    print("  -> Scores overlap: a score threshold alone can't separate them."
           if s["overlap"] else "  -> No overlap: a threshold between these values would work.")
 
     misses = [r for r in scored if not r["chunk_hit"]]
@@ -235,16 +236,42 @@ def evaluate_router(router, name: str, show_all: bool = False, test_set: Path = 
     return summary
 
 
+def compare_retrievers(names: list[str], show_all: bool) -> None:
+    """Run the same retrieval evaluation for each retriever, then print a side-by-side table."""
+    results = {}
+    for name in names:
+        try:
+            retriever = make_retriever(name) if name != "bm25" else BM25Retriever()
+        except Exception as exc:
+            print(f"\n[skip] {name}: {exc}")
+            continue
+        if name != "bm25" and isinstance(retriever, BM25Retriever):
+            print(f"\n[skip] {name}: embeddings or Azure secrets not available")
+            continue
+        results[name] = evaluate_retrieval(retriever, name, show_all)
+    if len(results) > 1:
+        pct = lambda v: f"{v * 100:.0f}%"
+        print("Retrieval comparison")
+        print("-" * 64)
+        print(f"{'Retriever':<10}{'Doc hit@3':>11}{'Chunk hit@3':>13}{'Recall@3':>10}{'MRR':>7}")
+        for name, m in results.items():
+            print(f"{name:<10}{pct(m['doc_hit@3']):>11}{pct(m['chunk_hit@3']):>13}"
+                  f"{pct(m['recall@3']):>10}{m['mrr']:>7.2f}")
+        print()
+
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description="Evaluate ARAG retrieval and routing.")
     p.add_argument("--only", choices=["retrieval", "router"], help="Run just one part")
+    p.add_argument("--retriever", choices=["bm25", "vector", "hybrid", "all"], default="all",
+                   help="Which retriever(s) to evaluate (default: all available)")
     p.add_argument("--show-all", action="store_true", help="Show every query, not just misses")
     args = p.parse_args()
-    retriever = BM25Retriever()
     if args.only in (None, "retrieval"):
-        evaluate_retrieval(retriever, "bm25", args.show_all)
+        names = ["bm25", "vector", "hybrid"] if args.retriever == "all" else [args.retriever]
+        compare_retrievers(names, args.show_all)
     if args.only in (None, "router"):
-        router = RuleRouter(retriever)
+        router = RuleRouter(BM25Retriever())
         evaluate_router(router, "rules", args.show_all, TEST_SET)
         if ROUTER_HOLDOUT.exists():
             evaluate_router(router, "rules", args.show_all, ROUTER_HOLDOUT)
