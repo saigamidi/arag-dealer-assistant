@@ -218,3 +218,13 @@ __marimo__/
 .streamlit/secrets.toml
 data/logs/
 data/cache/
+
+# --- ARAG ---
+# Local settings (keys belong in Codespaces secrets, never here)
+.env
+# Runtime logs and caches
+data/logs/
+data/cache/
+# Editor / OS
+.DS_Store
+.vscode/
