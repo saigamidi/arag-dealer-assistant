@@ -241,4 +241,4 @@ A personal portfolio project exploring RAG and LLM routing from both the **produ
 
 **Built with:** Python · FastAPI · Streamlit · Azure OpenAI · rank-bm25 · pytest · GitHub Codespaces
 
-**Author:** [Your Name](https://www.linkedin.com/in/your-profile)
+**Author:** [Sai Krishna Gamidi](https://www.linkedin.com/in/sai-krishna-gamidi-14565828/)
