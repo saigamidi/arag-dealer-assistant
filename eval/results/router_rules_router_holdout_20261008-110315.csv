@@ -1,0 +1,16 @@
+query_id,category,query,expected_route,predicted_route,route_ok,expected_entity,extracted,entity_ok,decided_by,reasons
+X01,holdout,Do you have the left LED headlight for the SUV Sport?,clarify,static,0,,,,rules,no IDs and no live intent
+X02,holdout,"ORD-10460, what's going on with it?",realtime,realtime,1,ORD-10460,ORD-10460,1,rules,order ID found: ORD-10460 (always needs a live lookup)
+X03,holdout,Is the restocking fee refundable if a vehicle return is rejected?,static,static,1,,,,rules,no IDs and no live intent
+X04,holdout,How long does shipping take from the warehouse to a dealer?,static,static,1,,,,rules,general question about live systems (policy intent: how long)
+X05,holdout,Can I still cancel ORD-10503?,hybrid,hybrid,1,ORD-10503,ORD-10503,1,rules,order ID found: ORD-10503 (always needs a live lookup) / policy intent: cancel
+X06,holdout,What's the price and availability of ACC-4002?,hybrid,hybrid,1,ACC-4002,ACC-4002,1,rules,part ID found: ACC-4002 / live intent: availab; policy intent: price
+X07,holdout,BRK-1001 qty at WH-EAST,realtime,static,0,BRK-1001,BRK-1001,1,rules,"part ID found: BRK-1001 / no live intent, so the catalog answers it"
+X08,holdout,Has my brake rotor order shipped?,clarify,clarify,1,,,,rules,live intent (shipped) but no part or order ID
+X09,holdout,Is ELC-3010 covered by the standard warranty?,static,static,1,ELC-3010,ELC-3010,1,rules,"part ID found: ELC-3010 / no live intent, so the catalog answers it"
+X10,holdout,"Need 3 x FLT-2010 today, can you confirm we have them?",realtime,static,0,FLT-2010,FLT-2010,1,rules,"part ID found: FLT-2010 / no live intent, so the catalog answers it"
+X11,holdout,How are recall parts prioritized in the supply chain?,static,static,1,,,,rules,no IDs and no live intent
+X12,holdout,What happens if order ORD-10388 is delayed again?,hybrid,hybrid,1,ORD-10388,ORD-10388,1,rules,order ID found: ORD-10388 (always needs a live lookup) / policy intent: what happens
+X13,holdout,Is there stock of the infotainment module?,clarify,clarify,1,,,,rules,live intent (stock) but no part or order ID
+X14,holdout,What's the ETA on 10482?,clarify,clarify,1,,,,rules,live intent (eta) but no part or order ID
+X15,holdout,Which rotors are compatible with the SUV Sport?,static,static,1,,,,rules,no IDs and no live intent

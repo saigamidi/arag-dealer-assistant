@@ -1,3 +1,9 @@
 run_at,router,test_set,routing_accuracy,entity_accuracy
 20261003-082902,rules,test_set.csv,1.0,1.0
 20261003-082902,rules,router_holdout.csv,0.8,1.0
+20261008-110315,rules,test_set.csv,1.0,1.0
+20261008-110315,rules,router_holdout.csv,0.8,1.0
+20261008-110410,llm,test_set.csv,1.0,1.0
+20261008-110451,llm,router_holdout.csv,1.0,1.0
+20261008-110610,tiered,test_set.csv,1.0,1.0
+20261008-110649,tiered,router_holdout.csv,1.0,1.0

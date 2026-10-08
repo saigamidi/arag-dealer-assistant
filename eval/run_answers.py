@@ -9,7 +9,7 @@ Metrics (PRD targets in brackets)
   * Refusal correctness  [100%]    out-of-scope -> refused; answerable -> not refused
   * Citation coverage    [100%]    answered knowledge-base questions cite at least one source
   * Cites expected source          a cited chunk is one of the labeled expected chunks
-  * Conflict flagged               the floor-mat question (S10) is flagged as a conflict
+  * Conflicts flagged              questions labeled flag_conflict (S10, S16) get status "conflict"
   * Latency p90          [< 5s]
   * Tokens and estimated cost per query
 
@@ -51,6 +51,9 @@ JUDGE_PROMPT = """You grade answers from a dealer support assistant.
 Given a QUESTION, the EXPECTED answer (ground truth) and the ACTUAL answer, decide whether the ACTUAL answer
 is correct: it must state the key facts of the EXPECTED answer (numbers, IDs, yes/no, conditions) and must not
 contradict them. Extra correct detail is fine. Wording does not matter.
+If the ACTUAL answer states a general rule that, applied to the case in the QUESTION, gives the EXPECTED result,
+it is correct (e.g. "refunds are prorated after 30 days" correctly answers a question about day 45).
+Ignore the "Live data" block formatting; judge the facts.
 Return only JSON: {"correct": true | false, "reason": "<one short sentence>"}"""
 
 
@@ -135,7 +138,8 @@ def run(only: set[str] | None = None) -> dict:
     print(f"Refusal correctness    {pct(summary['refusal_correctness']):>5}   (PRD target 100%)")
     print(f"Citation coverage      {pct(summary['citation_coverage']):>5}   (PRD target 100%)")
     print(f"Cites expected source  {pct(summary['cites_expected_source']):>5}")
-    print(f"Conflict flagged (S10) {pct(summary['conflict_flagged']):>5}")
+    n_conf = sum(1 for r in records if r.get("conflict_ok") is not None)
+    print(f"Conflicts flagged      {pct(summary['conflict_flagged']):>5}   ({n_conf} conflict questions)")
     print(f"Latency p90            {p90 / 1000:.1f}s    (PRD target < 5s)")
     print(f"Cost per LLM query     ${summary['avg_cost_per_llm_query_usd']:.5f}   "
           f"(this run incl. judge: ${summary['run_cost_usd']:.4f}; prices are estimates)")

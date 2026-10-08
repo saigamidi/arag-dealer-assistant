@@ -9,6 +9,7 @@ Run from the project root, with the mock API running in another terminal:
 import streamlit as st
 
 from src.api_client import ApiClient
+from src.ingest import check_freshness
 from src.pipeline import Assistant
 
 st.set_page_config(page_title="ARAG Dealer Support Assistant", page_icon="🔧", layout="centered")
@@ -73,6 +74,7 @@ def render_answer(answer, idx: int, is_latest: bool):
             for r in answer.api_results:
                 st.json(r.data if r.ok else {"error": r.error_code, "message": r.message})
     with st.expander("Why this route?"):
+        st.caption(f"Decided by: {answer.route_decided_by}")
         for reason in answer.reasons:
             st.markdown(f"- {reason}")
 
@@ -103,6 +105,24 @@ def sidebar() -> str | None:
                            "BM25Retriever": "BM25 (keyword)"}
         kind = type(get_assistant().retriever).__name__
         st.markdown(f"**Search:** {retriever_label.get(kind, kind)}")
+        router_label = {"TieredRouter": "tiered (rules fast path + LLM)", "LLMRouter": "LLM",
+                        "RuleRouter": "rules"}
+        rkind = type(get_assistant().router).__name__
+        st.markdown(f"**Routing:** {router_label.get(rkind, rkind)}")
+
+        fresh = check_freshness()
+        if fresh["stale"]:
+            if fresh["never_ingested"]:
+                st.error("Knowledge base not ingested yet. Run `python -m src.ingest`.")
+            else:
+                docs = fresh["changed"] + fresh["added"] + fresh["removed"]
+                parts = []
+                if docs:
+                    parts.append(f"documents changed since last ingest: {', '.join(docs)}")
+                if fresh["embeddings_stale"]:
+                    parts.append(f"{fresh['embeddings_stale']} chunk(s) missing up-to-date embeddings")
+                st.warning("⚠️ **Answers may be out of date** — " + "; ".join(parts) +
+                           ".  \nRun `python -m src.ingest` then `python -m src.embeddings`, and restart.")
 
         healthy = ApiClient().health()
         st.markdown(f"**Mock API:** {'🟢 connected' if healthy else '🔴 not running'}")

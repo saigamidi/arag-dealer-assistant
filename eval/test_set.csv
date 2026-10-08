@@ -14,6 +14,8 @@ S12,What is the maximum goodwill gesture a dealer can offer without approval?,st
 S13,How quickly must portal access be removed when an employee leaves the dealership?,static,static,,dealer_portal_access::access-revocation,answer,Within 24 hours
 S14,What paperwork does a customer need to get a car loan?,static,static,,financing_incentives::documentation-required-for-financing,answer,"Proof of income, valid ID, proof of residence"
 S15,Can a customer send back a car they bought three days ago?,static,static,,return_policy::new-vehicle-returns,answer,"Yes, within 5 calendar days if under 250 miles and undamaged; $500 restocking fee"
+S16,Can a dealer return an unopened special-order part?,static,static,,return_policy::parts-returns|return_policy::non-returnable-items,flag_conflict,Sources conflict: Parts Returns says special-order parts are non-returnable once opened (so unopened may be returned within 30 days); Non-Returnable Items lists special-order parts as non-returnable outright
+S17,Is FLT-2002 compatible with the SUV Touring?,static,static,FLT-2002,parts_catalog_filters_fluids::FLT-2002,answer,No. FLT-2002 is listed as compatible with the SUV Sport only; the catalog does not list it for the SUV Touring
 R01,How many BRK-1020 calipers are in stock?,realtime,realtime,BRK-1020,,api_lookup,"Inventory API: 9 units, low stock"
 R02,What is the status of order ORD-10482?,realtime,realtime,ORD-10482,,api_lookup,Order API: Shipped
 R03,Is FLT-2001 available at the north warehouse?,realtime,realtime,FLT-2001,,api_lookup,Inventory API with warehouse=WH-NORTH: 210 units

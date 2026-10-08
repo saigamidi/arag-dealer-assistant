@@ -1,11 +1,11 @@
 {
   "retriever": "bm25",
   "k": 3,
-  "queries_scored": 20,
-  "doc_hit@3": 0.9,
-  "chunk_hit@3": 0.9,
-  "recall@3": 0.875,
-  "mrr": 0.825,
+  "queries_scored": 22,
+  "doc_hit@3": 0.909,
+  "chunk_hit@3": 0.909,
+  "recall@3": 0.886,
+  "mrr": 0.841,
   "by_category": {
     "hybrid": {
       "n": 5,
@@ -13,14 +13,14 @@
       "chunk_hit@3": 1.0
     },
     "static": {
-      "n": 15,
-      "doc_hit@3": 0.867,
-      "chunk_hit@3": 0.867
+      "n": 17,
+      "doc_hit@3": 0.882,
+      "chunk_hit@3": 0.882
     }
   },
   "score_separation": {
     "answerable_min": 3.483,
-    "answerable_median": 11.962,
+    "answerable_median": 11.818,
     "out_of_scope_max": 11.393,
     "out_of_scope_median": 5.282,
     "overlap": true

@@ -36,7 +36,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from src.retrieve import BM25Retriever, make_retriever
-from src.router import RuleRouter
+from src.router import LLMRouter, RuleRouter, TieredRouter, make_router
 
 TEST_SET = Path("eval/test_set.csv")
 ROUTER_HOLDOUT = Path("eval/router_holdout.csv")   # written AFTER the rules, never used to tune them
@@ -177,6 +177,7 @@ def evaluate_router(router, name: str, show_all: bool = False, test_set: Path = 
             "route_ok": int(d.route == row["expected_route"]),
             "expected_entity": expected_entity, "extracted": "|".join(sorted(extracted)),
             "entity_ok": int(extracted == {expected_entity}) if expected_entity else None,
+            "decided_by": d.decided_by,
             "reasons": " / ".join(d.reasons),
         })
 
@@ -236,6 +237,37 @@ def evaluate_router(router, name: str, show_all: bool = False, test_set: Path = 
     return summary
 
 
+def compare_routers(names: list[str], show_all: bool) -> None:
+    """Evaluate each router on the main and held-out sets; print accuracy vs LLM calls and tokens."""
+    bm25 = BM25Retriever()
+    table = []
+    for name in names:
+        router = make_router(name, retriever=bm25)
+        if name != "rules" and isinstance(router, RuleRouter):
+            print(f"\n[skip] {name}: Azure OpenAI not configured")
+            continue
+        llm = router if isinstance(router, LLMRouter) else getattr(router, "llm", None)
+        for test_set in [TEST_SET] + ([ROUTER_HOLDOUT] if ROUTER_HOLDOUT.exists() else []):
+            calls_before = llm.calls if llm else 0
+            tokens_before = (llm.tokens_in + llm.tokens_out) if llm else 0
+            fast_before = getattr(router, "fast_path", 0)
+            m = evaluate_router(router, name, show_all, test_set)
+            table.append({"router": name, "set": test_set.stem, "n": m["queries"],
+                          "accuracy": m["routing_accuracy"], "entities": m["entity_accuracy"],
+                          "llm_calls": (llm.calls - calls_before) if llm else 0,
+                          "tokens": ((llm.tokens_in + llm.tokens_out) - tokens_before) if llm else 0,
+                          "fast_path": getattr(router, "fast_path", 0) - fast_before})
+    if len(table) > 2:
+        pct = lambda v: f"{v * 100:.0f}%"
+        print("Router comparison")
+        print("-" * 72)
+        print(f"{'Router':<8}{'Test set':<17}{'Accuracy':>9}{'Entities':>10}{'LLM calls':>11}{'Tokens':>9}{'Fast path':>11}")
+        for r in table:
+            print(f"{r['router']:<8}{r['set']:<17}{pct(r['accuracy']):>9}{pct(r['entities']):>10}"
+                  f"{r['llm_calls']:>6}/{r['n']:<4}{r['tokens']:>9}{r['fast_path']:>11}")
+        print()
+
+
 def compare_retrievers(names: list[str], show_all: bool) -> None:
     """Run the same retrieval evaluation for each retriever, then print a side-by-side table."""
     results = {}
@@ -265,13 +297,12 @@ if __name__ == "__main__":
     p.add_argument("--only", choices=["retrieval", "router"], help="Run just one part")
     p.add_argument("--retriever", choices=["bm25", "vector", "hybrid", "all"], default="all",
                    help="Which retriever(s) to evaluate (default: all available)")
+    p.add_argument("--router", choices=["rules", "llm", "tiered", "all"], default="all",
+                   help="Which router(s) to evaluate (default: all available; llm/tiered cost ~1 cent each)")
     p.add_argument("--show-all", action="store_true", help="Show every query, not just misses")
     args = p.parse_args()
     if args.only in (None, "retrieval"):
         names = ["bm25", "vector", "hybrid"] if args.retriever == "all" else [args.retriever]
         compare_retrievers(names, args.show_all)
     if args.only in (None, "router"):
-        router = RuleRouter(BM25Retriever())
-        evaluate_router(router, "rules", args.show_all, TEST_SET)
-        if ROUTER_HOLDOUT.exists():
-            evaluate_router(router, "rules", args.show_all, ROUTER_HOLDOUT)
+        compare_routers(["rules", "llm", "tiered"] if args.router == "all" else [args.router], args.show_all)

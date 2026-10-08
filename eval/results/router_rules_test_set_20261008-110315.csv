@@ -1,0 +1,43 @@
+query_id,category,query,expected_route,predicted_route,route_ok,expected_entity,extracted,entity_ok,decided_by,reasons
+S01,static,How long is the standard warranty on a new vehicle?,static,static,1,,,,rules,no IDs and no live intent
+S02,static,"Which front brake pads fit the Sedan EX, and what do they cost?",static,static,1,,,,rules,no IDs and no live intent
+S03,static,Can a customer cancel an extended warranty after 45 days?,static,static,1,,,,rules,no IDs and no live intent
+S04,static,What is the list price of BRK-1020?,static,static,1,,BRK-1020,,rules,"part ID found: BRK-1020 / no live intent, so the catalog answers it"
+S05,static,Are brake pads covered under the standard warranty?,static,static,1,,,,rules,no IDs and no live intent
+S06,static,How many days does a dealer have to submit a warranty claim after a repair?,static,static,1,,,,rules,general question about live systems (policy intent: warrant)
+S07,static,What is the restocking fee when a new vehicle is returned?,static,static,1,,,,rules,no IDs and no live intent
+S08,static,Which 12V battery is compatible with the SUV Touring?,static,static,1,,,,rules,no IDs and no live intent
+S09,static,How often should the cabin air filter be replaced?,static,static,1,,,,rules,no IDs and no live intent
+S10,static,Can a dealer return an unopened set of floor mats?,static,static,1,,,,rules,no IDs and no live intent
+S11,static,Do customers with an extended warranty get priority service appointments?,static,static,1,,,,rules,no IDs and no live intent
+S12,static,What is the maximum goodwill gesture a dealer can offer without approval?,static,static,1,,,,rules,no IDs and no live intent
+S13,static,How quickly must portal access be removed when an employee leaves the dealership?,static,static,1,,,,rules,no IDs and no live intent
+S14,static,What paperwork does a customer need to get a car loan?,static,static,1,,,,rules,no IDs and no live intent
+S15,static,Can a customer send back a car they bought three days ago?,static,static,1,,,,rules,no IDs and no live intent
+S16,static,Can a dealer return an unopened special-order part?,static,static,1,,,,rules,no IDs and no live intent
+S17,static,Is FLT-2002 compatible with the SUV Touring?,static,static,1,FLT-2002,FLT-2002,1,rules,"part ID found: FLT-2002 / no live intent, so the catalog answers it"
+R01,realtime,How many BRK-1020 calipers are in stock?,realtime,realtime,1,BRK-1020,BRK-1020,1,rules,"part ID found: BRK-1020 / live intent: in stock, stock, how many"
+R02,realtime,What is the status of order ORD-10482?,realtime,realtime,1,ORD-10482,ORD-10482,1,rules,order ID found: ORD-10482 (always needs a live lookup)
+R03,realtime,Is FLT-2001 available at the north warehouse?,realtime,realtime,1,FLT-2001,FLT-2001,1,rules,"part ID found: FLT-2001 / live intent: availab, warehouse"
+R04,realtime,Has order ORD-10471 been delivered yet?,realtime,realtime,1,ORD-10471,ORD-10471,1,rules,order ID found: ORD-10471 (always needs a live lookup)
+R05,realtime,Do we have any ELC-3021 headlights in stock?,realtime,realtime,1,ELC-3021,ELC-3021,1,rules,"part ID found: ELC-3021 / live intent: in stock, stock"
+R06,realtime,When will order ORD-10388 arrive?,realtime,realtime,1,ORD-10388,ORD-10388,1,rules,order ID found: ORD-10388 (always needs a live lookup)
+R07,realtime,check stock for acc-4040,realtime,realtime,1,ACC-4040,ACC-4040,1,rules,"part ID found: ACC-4040 / live intent: stock, check"
+R08,realtime,Track ORD-10215,realtime,realtime,1,ORD-10215,ORD-10215,1,rules,order ID found: ORD-10215 (always needs a live lookup)
+R09,realtime,Which warehouses have BRK-1040 right now?,realtime,realtime,1,BRK-1040,BRK-1040,1,rules,"part ID found: BRK-1040 / live intent: warehouses, right now"
+R10,realtime,Is order ORD-10503 still in Placed status?,realtime,realtime,1,ORD-10503,ORD-10503,1,rules,order ID found: ORD-10503 (always needs a live lookup)
+H01,hybrid,"Is ELC-3030 in stock, and can the dealer return it once opened?",hybrid,hybrid,1,ELC-3030,ELC-3030,1,rules,"part ID found: ELC-3030 / live intent: in stock, stock; policy intent: return"
+H02,hybrid,Is BRK-1020 in stock and is it covered by a parts warranty?,hybrid,hybrid,1,BRK-1020,BRK-1020,1,rules,"part ID found: BRK-1020 / live intent: in stock, stock; policy intent: warrant, cover"
+H03,hybrid,Can order ORD-10495 still be cancelled free of charge?,hybrid,hybrid,1,ORD-10495,ORD-10495,1,rules,"order ID found: ORD-10495 (always needs a live lookup) / policy intent: cancel, charge"
+H04,hybrid,Order ORD-10388 is late. What is the policy for delayed orders?,hybrid,hybrid,1,ORD-10388,ORD-10388,1,rules,order ID found: ORD-10388 (always needs a live lookup) / policy intent: polic
+H05,hybrid,We need 60 litres of FLD-2100. Is it in stock and do we get a bulk discount?,hybrid,hybrid,1,FLD-2100,FLD-2100,1,rules,"part ID found: FLD-2100 / live intent: in stock, stock; policy intent: discount"
+O01,out_of_scope,What is the oil filter part number for the SUV Touring?,static,static,1,,,,rules,no IDs and no live intent
+O02,out_of_scope,What is the towing capacity of the SUV Sport?,static,static,1,,,,rules,no IDs and no live intent
+O03,out_of_scope,What components does the Essential Plus plan cover?,static,static,1,,,,rules,no IDs and no live intent
+O04,out_of_scope,How do I reset the clock on the infotainment screen?,static,static,1,,,,rules,no IDs and no live intent
+O05,out_of_scope,What will the weather be in Dubai tomorrow?,static,static,1,,,,rules,no IDs and no live intent
+O06,out_of_scope,What is the MSRP of a new SUV Touring?,static,static,1,,,,rules,no IDs and no live intent
+O07,out_of_scope,Who is the CEO of the company?,static,static,1,,,,rules,no IDs and no live intent
+A01,ambiguous,Where is my order?,clarify,clarify,1,,,,rules,live intent (where is) but no part or order ID
+A02,ambiguous,Is the part in stock?,clarify,clarify,1,,,,rules,"live intent (in stock, stock) but no part or order ID"
+A03,ambiguous,Can you check stock for the front brake caliper?,clarify,clarify,1,,,,rules,"live intent (stock, check) but no part or order ID"

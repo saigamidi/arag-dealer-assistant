@@ -1,2 +1,7 @@
 run_at,model,retriever,questions,answer_correctness,refusal_correctness,citation_coverage,cites_expected_source,conflict_flagged,latency_p90_ms,avg_cost_per_llm_query_usd,run_cost_usd
 20261008-085540,azure:arag-chat,ResilientVectorRetriever,40,1.0,1.0,1.0,1.0,0.0,2723,0.000314,0.0112
+20261008-101903,azure:arag-chat,ResilientVectorRetriever,40,1.0,0.963,1.0,1.0,1.0,2771,0.000386,0.0132
+20261008-102446,azure:arag-chat,ResilientVectorRetriever,42,1.0,0.966,1.0,1.0,1.0,3063,0.000418,0.0152
+20261008-103032,azure:arag-chat,ResilientVectorRetriever,42,0.955,0.966,1.0,1.0,1.0,3109,0.000419,0.0151
+20261008-103703,azure:arag-chat,ResilientVectorRetriever,42,0.955,0.966,1.0,1.0,1.0,3208,0.000439,0.0158
+20261008-104041,azure:arag-chat,ResilientVectorRetriever,42,0.955,0.931,1.0,1.0,1.0,2896,0.000463,0.0171

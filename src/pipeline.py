@@ -28,7 +28,7 @@ from src.conversation import PendingClarification, resolve_follow_up
 from src.generator import Citation, Generator
 from src.llm_generator import make_generator
 from src.retrieve import make_retriever
-from src.router import RuleRouter
+from src.router import make_router
 
 LOG_DIR = Path("data/logs")
 # Passages retrieved per question. The retrieval metrics are measured at 3; the
@@ -47,6 +47,7 @@ class Answer:
     reasons: list[str] = field(default_factory=list)
     latency_ms: int = 0
     generator: str = "stub"
+    route_decided_by: str = "rules"
     status: str = "answered"                   # answered / refused / conflict / unverified / live_only / clarify / fallback
     note: str | None = None                    # warning shown to the agent, e.g. "verify before replying"
     tokens_in: int = 0
@@ -62,7 +63,7 @@ class Assistant:
         self.retriever = retriever or make_retriever()
         # Clarification candidates ("BRK-1020 or BRK-1021?") use keyword search:
         # exact part names matter more than meaning there.
-        self.router = router or RuleRouter(getattr(self.retriever, "keyword_retriever", self.retriever))
+        self.router = router or make_router(retriever=getattr(self.retriever, "keyword_retriever", self.retriever))
         self.generator = generator or make_generator()
         self.api = api or ApiClient()
         self.log_dir = log_dir
@@ -91,7 +92,7 @@ class Assistant:
             text=generated.text, citations=generated.citations, api_results=api_results,
             reasons=decision.reasons, latency_ms=int((time.perf_counter() - start) * 1000),
             generator=getattr(self.generator, "name", "unknown"),
-            status=generated.status, note=generated.note,
+            status=generated.status, note=generated.note, route_decided_by=decision.decided_by,
             tokens_in=generated.tokens_in, tokens_out=generated.tokens_out,
             interpreted_as=resolved,
             follow_up_of=pending.answer_id if (resolved and pending) else None,
@@ -118,6 +119,7 @@ class Assistant:
             "interpreted_as": answer.interpreted_as,
             "follow_up_of": answer.follow_up_of,
             "route": answer.route,
+            "route_decided_by": decision.decided_by,
             "reasons": answer.reasons,
             "entities": {"parts": decision.part_ids, "orders": decision.order_ids,
                          "warehouse": decision.warehouse},

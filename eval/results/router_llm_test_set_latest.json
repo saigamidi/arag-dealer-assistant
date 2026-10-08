@@ -1,5 +1,5 @@
 {
-  "router": "rules",
+  "router": "llm",
   "test_set": "test_set.csv",
   "queries": 42,
   "routing_accuracy": 1.0,

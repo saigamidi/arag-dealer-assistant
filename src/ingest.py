@@ -265,6 +265,41 @@ def ingest(kb_dir: Path = KB_DIR, out_dir: Path = OUT_DIR, rebuild: bool = False
     return report
 
 
+def check_freshness(kb_dir: Path = KB_DIR, out_dir: Path = OUT_DIR) -> dict:
+    """
+    Compare the knowledge base on disk with the last ingest, without changing anything.
+    Used at app startup so a stale index is visible instead of silent (PRD risk K2).
+    Also checks embeddings: chunks whose vectors are missing or out of date.
+    Returns {"stale": bool, "changed": [...], "added": [...], "removed": [...], "embeddings_stale": int}.
+    """
+    manifest_path = out_dir / "manifest.json"
+    result = {"stale": False, "changed": [], "added": [], "removed": [], "embeddings_stale": 0,
+              "never_ingested": not manifest_path.exists()}
+    if result["never_ingested"]:
+        result["stale"] = True
+        return result
+    docs = json.loads(manifest_path.read_text(encoding="utf-8")).get("documents", {})
+    current = {p.stem: p for p in kb_dir.glob("*.md")} if kb_dir.exists() else {}
+    for doc_id, path in current.items():
+        if doc_id not in docs:
+            result["added"].append(doc_id)
+        elif docs[doc_id]["hash"] != sha256(path.read_text(encoding="utf-8")):
+            result["changed"].append(doc_id)
+    result["removed"] = sorted(set(docs) - set(current))
+
+    emb_path, chunks_path = out_dir / "embeddings.json", out_dir / "chunks.jsonl"
+    if emb_path.exists() and chunks_path.exists():
+        vectors = json.loads(emb_path.read_text(encoding="utf-8")).get("vectors", {})
+        for line in chunks_path.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                c = json.loads(line)
+                if vectors.get(c["chunk_id"], {}).get("hash") != c["content_hash"]:
+                    result["embeddings_stale"] += 1
+    result["stale"] = bool(result["changed"] or result["added"] or result["removed"]
+                           or result["embeddings_stale"])
+    return result
+
+
 def print_summary(report: dict) -> None:
     mode = "Full rebuild" if report["rebuild"] else "Incremental update"
     print(f"\n{mode} complete: {report['total_documents']} documents, {report['total_chunks']} chunks")

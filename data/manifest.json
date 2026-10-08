@@ -1,6 +1,6 @@
 {
   "chunker_version": "1.0",
-  "updated_at": "2026-10-02T11:49:44+00:00",
+  "updated_at": "2026-10-08T10:33:17+00:00",
   "documents": {
     "accessories_catalog": {
       "hash": "59fa5ce3456ac0a2622d77e08c09b2d84e4bc224b7d6c00f77390c405da50639",
@@ -150,7 +150,7 @@
       ]
     },
     "return_policy": {
-      "hash": "301ce7b406f93814d95bc7a136ed8de246fd3184c7d4c91b5bae4ac5669aed23",
+      "hash": "e95c4c9ae1be2257dca369877ba4dae895cbcbd1e2711fe7f4f9cbd8328f78dd",
       "chunk_ids": [
         "return_policy::new-vehicle-returns",
         "return_policy::parts-returns",

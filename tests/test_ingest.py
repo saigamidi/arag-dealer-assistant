@@ -143,3 +143,40 @@ def test_chunker_version_change_forces_rebuild(workspace, monkeypatch):
     ing.ingest(kb, out)
     monkeypatch.setattr(ing, "CHUNKER_VERSION", "999")
     assert ing.ingest(kb, out)["rebuild"] is True
+
+
+
+# ---------------------------------------------------------------- freshness check (startup warning)
+def test_freshness_clean_after_ingest(workspace):
+    kb, out = workspace
+    ing.ingest(kb, out)
+    assert ing.check_freshness(kb, out)["stale"] is False
+
+
+def test_freshness_detects_edited_added_and_removed_docs(workspace):
+    kb, out = workspace
+    ing.ingest(kb, out)
+    (kb / "return_policy.md").write_text((kb / "return_policy.md").read_text().replace("30 days", "45 days"))
+    (kb / "new_policy.md").write_text("# New\n\n## Rule\nSomething new.\n")
+    (kb / "dealer_onboarding.md").unlink()
+    f = ing.check_freshness(kb, out)
+    assert f["stale"] and f["changed"] == ["return_policy"] and f["added"] == ["new_policy"]
+    assert f["removed"] == ["dealer_onboarding"]
+
+
+def test_freshness_detects_stale_embeddings(workspace):
+    """The real K2 case: chunks re-ingested but embeddings not refreshed."""
+    from src.embeddings import EmbeddingStore, HashEmbedder
+    kb, out = workspace
+    ing.ingest(kb, out)
+    chunks = read_chunks(out)
+    EmbeddingStore(out / "embeddings.json").sync(chunks, HashEmbedder())
+    assert ing.check_freshness(kb, out)["stale"] is False
+    (kb / "return_policy.md").write_text((kb / "return_policy.md").read_text().replace("30 days", "45 days"))
+    ing.ingest(kb, out)                                   # documents re-ingested...
+    f = ing.check_freshness(kb, out)                       # ...but embeddings not refreshed
+    assert f["stale"] and f["embeddings_stale"] == 1 and not f["changed"]
+
+
+def test_freshness_reports_never_ingested(tmp_path):
+    assert ing.check_freshness(KB_DIR, tmp_path / "nothing")["never_ingested"] is True

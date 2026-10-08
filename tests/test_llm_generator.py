@@ -163,3 +163,28 @@ def test_make_generator_respects_config(monkeypatch):
     assert isinstance(make_generator("llm"), StubGenerator)        # no secrets -> safe fallback
     with pytest.raises(ValueError):
         make_generator("magic")
+
+
+def test_prompt_limits_rules_to_the_items_they_name():
+    """Regression for O03: the model extended a two-plan rule to a third plan."""
+    assert "applies ONLY to the items it names" in SYSTEM_PROMPT
+
+
+def test_test_set_covers_two_conflicts_and_scope_inference():
+    import csv
+    rows = {r["query_id"]: r for r in csv.DictReader(open(Path(__file__).resolve().parent.parent / "eval/test_set.csv"))}
+    assert sum(r["expected_behavior"] == "flag_conflict" for r in rows.values()) == 2
+    assert {"S16", "S17", "O03"} <= rows.keys()
+
+
+def test_prompt_requires_status_to_match_answer():
+    """Regression for O03: a correct refusal was labeled 'answered'."""
+    assert "The status must match your answer" in SYSTEM_PROMPT
+    # Regression for H03: a correct answer with a caveat must stay "answered".
+    assert "MAIN" in SYSTEM_PROMPT and "only a detail is" in SYSTEM_PROMPT
+
+
+def test_judge_accepts_rules_applied_to_the_case():
+    """Regression for S03: the judge rejected a correct general-rule answer."""
+    from eval.run_answers import JUDGE_PROMPT
+    assert "applied to the case" in JUDGE_PROMPT

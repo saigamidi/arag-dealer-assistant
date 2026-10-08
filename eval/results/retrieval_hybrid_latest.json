@@ -1,11 +1,11 @@
 {
   "retriever": "hybrid",
   "k": 3,
-  "queries_scored": 20,
-  "doc_hit@3": 0.95,
-  "chunk_hit@3": 0.9,
-  "recall@3": 0.9,
-  "mrr": 0.872,
+  "queries_scored": 22,
+  "doc_hit@3": 0.955,
+  "chunk_hit@3": 0.909,
+  "recall@3": 0.909,
+  "mrr": 0.884,
   "by_category": {
     "hybrid": {
       "n": 5,
@@ -13,9 +13,9 @@
       "chunk_hit@3": 1.0
     },
     "static": {
-      "n": 15,
-      "doc_hit@3": 0.933,
-      "chunk_hit@3": 0.867
+      "n": 17,
+      "doc_hit@3": 0.941,
+      "chunk_hit@3": 0.882
     }
   },
   "score_separation": {
