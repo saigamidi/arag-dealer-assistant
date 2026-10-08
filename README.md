@@ -1,5 +1,6 @@
-![tests](https://github.com/saigamidi/arag-dealer-assistant/actions/workflows/tests.yml/badge.svg)
 # ARAG: Dealer Support Assistant
+
+![tests](https://github.com/saigamidi/arag-dealer-assistant/actions/workflows/tests.yml/badge.svg)
 
 **An agentic RAG assistant that answers dealer support questions from policy documents *and* live systems, with every answer cited, every routing decision explained, and every design choice measured.**
 
