@@ -17,6 +17,16 @@ Dealer support agents answer the same policy questions repeatedly (warranty, ret
 <!-- Record a 20–30 second GIF and save it as docs/demo.gif (see "Recording the demo" below). -->
 ![Demo](docs/demo.gif)
 
+### Full walkthrough (2:51)
+
+
+
+https://github.com/user-attachments/assets/3aa53c40-a195-4c38-bbb1-20f9e7ee8278
+
+
+
+
+
 *Shown: a cited policy answer, a live stock check, a hybrid question, a clarification follow-up ("BRK-1020"), a flagged conflict, and the simulated API outage.*
 
 ---
