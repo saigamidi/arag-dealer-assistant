@@ -18,7 +18,11 @@ Dealer support agents answer the same policy questions repeatedly (warranty, ret
 
 ### Full walkthrough (2:51)
 
-Uploading ARAG_Dealer_Assistant_Demo.mp4…
+
+
+https://github.com/user-attachments/assets/3aa53c40-a195-4c38-bbb1-20f9e7ee8278
+
+
 
 
 
