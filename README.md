@@ -234,19 +234,6 @@ arag-dealer-assistant/
 
 ---
 
-## Recording the demo
-
-A 20–30 second GIF is the most-viewed part of a portfolio repository. Suggested sequence:
-
-1. *How long is the standard warranty on a new vehicle?* → cited answer, open **Sources**
-2. *Can you check stock for the front brake caliper?* → clarification → reply **BRK-1020**
-3. *Can a dealer return an unopened set of floor mats?* → **⚠️ Sources disagree**
-4. Sidebar → **Outage (503)** → *Is ELC-3030 in stock, and can it be returned once opened?* → graceful fallback
-
-Free tools: ScreenToGif (Windows) or Kap (macOS). Save as `docs/demo.gif`.
-
----
-
 ## About this project
 
 A personal portfolio project exploring RAG and LLM routing from both the **product** and the **engineering** side: problem framing, content audit, metrics and release gates alongside retrieval, routing, prompting and evaluation. It is modeled on a product I owned professionally, but this implementation is my own. All data is **synthetic**: no real company systems, customers or documents are used.
