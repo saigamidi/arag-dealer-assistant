@@ -1,0 +1,13 @@
+{
+  "model": "azure:arag-chat",
+  "retriever": "ResilientVectorRetriever",
+  "questions": 40,
+  "answer_correctness": 1.0,
+  "refusal_correctness": 1.0,
+  "citation_coverage": 1.0,
+  "cites_expected_source": 1.0,
+  "conflict_flagged": 0.0,
+  "latency_p90_ms": 2723,
+  "avg_cost_per_llm_query_usd": 0.000314,
+  "run_cost_usd": 0.0112
+}

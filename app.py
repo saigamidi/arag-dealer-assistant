@@ -42,7 +42,14 @@ def init_state():
 
 
 def render_answer(answer, idx: int, is_latest: bool):
-    st.caption(f"{ROUTE_BADGE.get(answer.route, answer.route)}  ·  {answer.latency_ms} ms")
+    status_badge = {"refused": "🤷 Not in sources", "conflict": "⚠️ Conflicting sources",
+                    "unverified": "❗ Unverified", "fallback": "🔁 AI unavailable, passages shown"}
+    bits = [ROUTE_BADGE.get(answer.route, answer.route), f"{answer.latency_ms} ms"]
+    if answer.status in status_badge:
+        bits.append(status_badge[answer.status])
+    if answer.tokens_in:
+        bits.append(f"{answer.tokens_in + answer.tokens_out} tokens")
+    st.caption("  ·  ".join(bits))
     if answer.interpreted_as:
         st.caption(f"↪️ Interpreted as: *{answer.interpreted_as}*")
     st.markdown(answer.text)
@@ -88,7 +95,10 @@ def render_answer(answer, idx: int, is_latest: bool):
 def sidebar() -> str | None:
     with st.sidebar:
         st.header("🔧 ARAG")
-        st.caption("Dealer support assistant · v1 preview (no LLM yet)")
+        gen = get_assistant().generator
+        st.caption("Dealer support assistant · " +
+                   (f"AI answers ({gen.client.name})" if getattr(gen, "name", "") == "llm"
+                    else "preview mode (passages only)"))
         retriever_label = {"ResilientVectorRetriever": "vector (semantic)", "HybridRetriever": "hybrid",
                            "BM25Retriever": "BM25 (keyword)"}
         kind = type(get_assistant().retriever).__name__

@@ -39,11 +39,17 @@ class GeneratedAnswer:
     text: str
     citations: list[Citation] = field(default_factory=list)
     mode: str = "stub"
+    # "answered", "refused" (not in the sources), "conflict" (sources disagree),
+    # "unverified" (answer without a citation), "live_only", "clarify", "fallback"
+    status: str = "answered"
+    tokens_in: int = 0
+    tokens_out: int = 0
+    note: str | None = None
 
 
 class Generator(Protocol):
     def generate(self, query: str, decision: RouteDecision, results: list[SearchResult],
-                 api_results: list[ApiResult]) -> GeneratedAnswer: ...
+                 api_results: list[ApiResult], context: list[dict] | None = None) -> GeneratedAnswer: ...
 
 
 # --------------------------------------------------------------------------
@@ -103,9 +109,10 @@ def _excerpt(chunk_text: str, limit: int = 320) -> str:
 class StubGenerator:
     name = "stub"
 
-    def generate(self, query, decision, results, api_results) -> GeneratedAnswer:
+    def generate(self, query, decision, results, api_results, context=None) -> GeneratedAnswer:
         if decision.route == "clarify":
-            return GeneratedAnswer(text=decision.clarification or "Could you share more details?")
+            return GeneratedAnswer(text=decision.clarification or "Could you share more details?",
+                                   status="clarify")
 
         parts: list[str] = []
         citations: list[Citation] = []
@@ -131,4 +138,5 @@ class StubGenerator:
             else:
                 parts.append("I couldn't find anything in the knowledge base that matches this question.")
 
-        return GeneratedAnswer(text="\n".join(parts), citations=citations)
+        status = "live_only" if (api_results and not decision.needs_retrieval) else "answered"
+        return GeneratedAnswer(text="\n".join(parts), citations=citations, status=status)

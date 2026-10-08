@@ -1,0 +1,2 @@
+run_at,model,retriever,questions,answer_correctness,refusal_correctness,citation_coverage,cites_expected_source,conflict_flagged,latency_p90_ms,avg_cost_per_llm_query_usd,run_cost_usd
+20261008-085540,azure:arag-chat,ResilientVectorRetriever,40,1.0,1.0,1.0,1.0,0.0,2723,0.000314,0.0112

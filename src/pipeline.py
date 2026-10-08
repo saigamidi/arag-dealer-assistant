@@ -15,6 +15,7 @@ Try it (mock API must be running for live data):
 from __future__ import annotations
 
 import json
+import os
 import sys
 import time
 import uuid
@@ -24,12 +25,15 @@ from pathlib import Path
 
 from src.api_client import ApiClient, ApiResult
 from src.conversation import PendingClarification, resolve_follow_up
-from src.generator import Citation, Generator, StubGenerator
+from src.generator import Citation, Generator
+from src.llm_generator import make_generator
 from src.retrieve import make_retriever
 from src.router import RuleRouter
 
 LOG_DIR = Path("data/logs")
-TOP_K = 3
+# Passages retrieved per question. The retrieval metrics are measured at 3; the
+# LLM gets a few more so that both sides of a conflict are more likely to be in view.
+TOP_K = int(os.getenv("RETRIEVAL_TOP_K", "5"))
 
 
 @dataclass
@@ -43,6 +47,10 @@ class Answer:
     reasons: list[str] = field(default_factory=list)
     latency_ms: int = 0
     generator: str = "stub"
+    status: str = "answered"                   # answered / refused / conflict / unverified / live_only / clarify / fallback
+    note: str | None = None                    # warning shown to the agent, e.g. "verify before replying"
+    tokens_in: int = 0
+    tokens_out: int = 0
     interpreted_as: str | None = None          # set when a follow-up was merged with its question
     follow_up_of: str | None = None            # answer_id of the clarification it answered
     pending: PendingClarification | None = None   # set when this answer asks a clarifying question
@@ -55,7 +63,7 @@ class Assistant:
         # Clarification candidates ("BRK-1020 or BRK-1021?") use keyword search:
         # exact part names matter more than meaning there.
         self.router = router or RuleRouter(getattr(self.retriever, "keyword_retriever", self.retriever))
-        self.generator = generator or StubGenerator()
+        self.generator = generator or make_generator()
         self.api = api or ApiClient()
         self.log_dir = log_dir
 
@@ -73,13 +81,18 @@ class Assistant:
         results = self.retriever.search(effective, k=TOP_K) if decision.needs_retrieval else []
         api_results = [self.api.call(c["endpoint"], c["id"], c.get("warehouse"), simulate)
                        for c in decision.api_calls]
-        generated = self.generator.generate(effective, decision, results, api_results)
+        # Small-to-big: add the notes sections linked to retrieved catalog rows.
+        context = (self.retriever.expand_related(results)
+                   if results and hasattr(self.retriever, "expand_related") else [r.chunk for r in results])
+        generated = self.generator.generate(effective, decision, results, api_results, context)
 
         answer = Answer(
             answer_id=uuid.uuid4().hex[:12], query=query, route=decision.route,
             text=generated.text, citations=generated.citations, api_results=api_results,
             reasons=decision.reasons, latency_ms=int((time.perf_counter() - start) * 1000),
             generator=getattr(self.generator, "name", "unknown"),
+            status=generated.status, note=generated.note,
+            tokens_in=generated.tokens_in, tokens_out=generated.tokens_out,
             interpreted_as=resolved,
             follow_up_of=pending.answer_id if (resolved and pending) else None,
         )
@@ -113,6 +126,9 @@ class Assistant:
                           for r in answer.api_results],
             "latency_ms": answer.latency_ms,
             "generator": answer.generator,
+            "status": answer.status,
+            "tokens": {"in": answer.tokens_in, "out": answer.tokens_out},
+            "cited": [c.chunk_id for c in answer.citations],
             "retriever": type(self.retriever).__name__,
             "retrieval_fallback": getattr(self.retriever, "last_fallback", None),
         })
