@@ -16,6 +16,12 @@ Dealer support agents answer the same policy questions repeatedly (warranty, ret
 <!-- Record a 20–30 second GIF and save it as docs/demo.gif (see "Recording the demo" below). -->
 ![Demo](docs/demo.gif)
 
+### Full walkthrough (2:51)
+
+Uploading ARAG_Dealer_Assistant_Demo.mp4…
+
+
+
 *Shown: a cited policy answer, a live stock check, a hybrid question, a clarification follow-up ("BRK-1020"), a flagged conflict, and the simulated API outage.*
 
 ---
